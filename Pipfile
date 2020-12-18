@@ -9,6 +9,7 @@ flake8 = "*"
 [packages]
 flask = "*"
 python-dotenv = "*"
+flask-oauthlib = "*"
 
 [requires]
 python_version = "3.8"
