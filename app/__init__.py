@@ -1,12 +1,22 @@
 from flask import Flask
 from app.views.main import landing
+from app.views.spotify import authorize
+from app.views.user import me
+from app.auth import oauth
+from app.errors import errors_bp
+import os
 
 
 def create_app() -> Flask:
     app = Flask(__name__)
+    app.secret_key = os.getenv('SECRET_KEY')
+    oauth.init_app(app)
     register_blueprints(app)
     return app
 
 
 def register_blueprints(app: Flask) -> None:
     app.register_blueprint(landing.landing_bp)
+    app.register_blueprint(authorize.auth_bp)
+    app.register_blueprint(me.me_bp)
+    app.register_blueprint(errors_bp)
