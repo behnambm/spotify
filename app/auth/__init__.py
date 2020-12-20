@@ -13,7 +13,7 @@ spotify = oauth.remote_app(
     request_token_url=None,
     authorize_url='https://accounts.spotify.com/authorize',
     access_token_url='https://accounts.spotify.com/api/token',
-    request_token_params={'scope': 'user-read-email'}
+    request_token_params={'scope': 'user-read-email user-top-read playlist-modify-public'}
 )
 
 
