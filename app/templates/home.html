@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block alerts %}
+    {% from 'macros/alerts.html' import show_alerts %}
+    {{ show_alerts('error') }}
+{% endblock %}
+
+{% block content %}
+<span>{{logged_in}}</span>
+{% endblock %}

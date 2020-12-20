@@ -1,7 +1,7 @@
 """
 Users in this view can access their personal info
 """
-from flask import Blueprint, jsonify, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, abort
 from app.auth import spotify
 from app.utils import login_required
 
@@ -15,4 +15,13 @@ def my_page():
     if 'error' in me.data:
         if "The access token expired" in me.data.get('error').get('message'):
             return redirect(url_for('auth.auth_user'))
-    return jsonify(me.data)
+    if me.status != 200:
+        abort(500)
+
+    return render_template(
+        'me.html',
+        data=me.data,
+        active='profile',
+        avatar_url=me.data['images'][0]['url'],
+
+    )

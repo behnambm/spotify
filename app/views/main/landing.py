@@ -11,6 +11,4 @@ landing_bp = Blueprint('landing', __name__)
 @landing_bp.route('/home/')
 @landing_bp.route('/index/')
 def landing_page():
-    if 'access_token' in session:
-        return redirect(url_for('me.my_page'))
-    return render_template('landing.html')
+    return render_template('home.html')

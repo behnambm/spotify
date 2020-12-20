@@ -1,0 +1,20 @@
+<!--This macro is for getting the flashed messages.-->
+
+{% macro show_alerts(category) %}
+{% if category %}
+    {% with messages = get_flashed_messages(category_filter=[category]) %}
+        {% if category == 'error' %}
+            {% set color_type = 'danger' %}
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ color_type }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+{% endif %}
+{% endmacro %}
