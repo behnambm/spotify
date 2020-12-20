@@ -12,6 +12,7 @@ python-dotenv = "*"
 flask-oauthlib = "*"
 flask-sqlalchemy = "*"
 marshmallow = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
