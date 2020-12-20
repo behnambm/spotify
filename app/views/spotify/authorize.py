@@ -24,9 +24,8 @@ def auth_callback():
     """
     resp = spotify.authorized_response()
     if resp is None or resp.get('access_token') is None:
-        error = request.args.get('error')
-        flash(error, 'error')
         return redirect(url_for('landing.landing_page'))
+
     session['access_token'] = resp.get('access_token')
     session['refresh_token'] = resp.get('refresh_token')
     return redirect(url_for('me.my_page'))
