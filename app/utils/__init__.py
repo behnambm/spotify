@@ -11,3 +11,18 @@ def login_required(f):
         return f(*args, **kwargs)
     return wrapper
 
+
+def extract_tracks_data(tracks: dict) -> list:
+    """
+    this function extracts needed data for serialization
+    :param tracks: a dict of tracks which spotify api returns
+    :return: a list of dicts
+    """
+    tracks_list = []
+    for item in tracks.get('items'):
+        tmp_dict = {}
+        tmp_dict['track_name'] = item.get('name')
+
+        tracks_list.append(tmp_dict)
+
+    return tracks_list
