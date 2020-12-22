@@ -1,5 +1,7 @@
-# Spotify Taste 
+# Spotify Taste  
 
+[![Actions Status](https://github.com/behnambm/spotify/workflows/Spotify%20Taste/badge.svg
+)](https://github.com/behnambm/spotify/actions)
 
 A spotify `OAuth` app written in Python/Flask.
 
