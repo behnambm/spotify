@@ -1,22 +1,30 @@
 """
 This endpoint is to get users top 10 tracks in a json format 
 """""
-from flask import Blueprint, jsonify, abort
+from flask import Blueprint, jsonify,  request
 from app.auth import spotify
 from app.schema.playlist import PlaylistSchema
-from app.utils import extract_tracks_data
+from app.utils import extract_tracks_data, login_required
+from app.utils.errors import TokenExpired
+
 
 top_tracks_bp = Blueprint('top_tracks', __name__, url_prefix='/me/top/')
 playlist_schema = PlaylistSchema(many=True)
 
 
 @top_tracks_bp.route('/')
+@login_required
 def get_top_tracks():
     """
     Retrieves user's top 20 songs in json format
+    Spotify's default count is 20
     """
     tracks = spotify.get('me/top/tracks')
 
-    tracks_data: list = extract_tracks_data(tracks.data)
+    if tracks.status == 401:
+        raise TokenExpired(next_url=request.endpoint)
 
-    return playlist_schema.dump(tracks_data)
+    tracks_needed_data = extract_tracks_data(tracks.data)
+    serialized_data = playlist_schema.dump(tracks_needed_data)
+
+    return jsonify(serialized_data)
