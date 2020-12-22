@@ -12,9 +12,7 @@ me_bp = Blueprint('me', __name__)
 @login_required
 def my_page():
     me = spotify.get('me')
-    if 'error' in me.data:
-        if "The access token expired" in me.data.get('error').get('message'):
-            return redirect(url_for('auth.auth_user'))
+
     if me.status != 200:
         abort(500)
 
