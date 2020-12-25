@@ -26,8 +26,9 @@ def oauth_error(e):
 
 @errors_bp.app_errorhandler(URLError)
 def internal_connection_error(e):
-    print(e)
-    return {'message': 'internal server error. connection error'}, 500
+    flash('Internal server error.', 'error')
+    # add logging here
+    return redirect(url_for('landing.landing_page'))
 
 
 @errors_bp.app_errorhandler(Unauthorized)
