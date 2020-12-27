@@ -3,7 +3,7 @@
 {% block title %}Me{% endblock %}
 
 {% block content %}
-{{ data['display_name'] }}
+<br>
 <div class="row">
     <div class="col-6">
         <img src="{{ avatar_url }}" class="avatar-img">
@@ -11,26 +11,31 @@
     <div class="col-6">
             <span class="user-info-list-label">
                 Email:
-                <span class="user-info-list-item"><small>ali@gmail.com</small></span>
+                <span class="user-info-list-item"><small>{{ data['email'] }}</small></span>
             </span>
             <span class="user-info-list-label">
                 Display Name:
-                <span class="user-info-list-item"><small>Behnam</small></span>
+                <span class="user-info-list-item"><small>{{ data['display_name'] }}</small></span>
             </span>
             <span class="user-info-list-label">
                 Spotify ID:
-                <span class="user-info-list-item">df54sd65f</span>
+                <span class="user-info-list-item">{{ data['id'] }}</span>
             </span>
     </div>
 </div>
+<br><br>
 <div class="row">
-    <div class="col-4 offset-5"><br><br>
-        <a class="share-song-btn">Show my top songs</a>
+    <div class="col-4 offset-lg-4" style="text-align: center">
+        <a class="show-tracks-btn">Show my top songs</a>
     </div>
 </div>
 <br><br>
-
-<div class="row justify-content-center">
+<div class="row">
+    <div class="col-4 offset-lg-4" id="loading-holder">
+        <img src="{{ url_for('static', filename='images/loading.gif') }}">
+    </div>
+</div>
+<div class="row justify-content-center" id="tracks-list-holder">
     <div class="col-10">
         <table class="table table-dark table-hover">
           <thead>
@@ -41,35 +46,15 @@
               <th scope="col" class="col-1 text-danger">REMOVE</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>wsd</td>
-              <td>AsdT</td>
-              <td>AL</td>
-              <td colspan="2" style="text-align: center">&times;</td>
-
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td colspan="2">&times;</td>
-
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td colspan="2">&times;</td>
-            </tr>
-          </tbody>
+          <tbody id="tracks-columns-holder"></tbody>
         </table>
     </div>
 </div>
 
 
-<div class="row justify-content-center" style="margin-bottom: 200px">
-    <div class="col-lg-4 offset-lg-5">
-        <button>Share</button>
+<div class="row" style="margin-bottom: 200px;">
+    <div class="col-4 offset-lg-4" style="text-align: center;">
+        <button id="share-btn">Share</button>
     </div>
 </div>
 {% endblock %}

@@ -38,7 +38,8 @@ a, li, p, span {
     color: #FFF;
 }
 
-.share-song-btn{
+.show-tracks-btn{
+    user-select: none;
     border: none;
     outline: none;
     padding: 10px 25px;
@@ -47,12 +48,12 @@ a, li, p, span {
     border-radius: 25px;
     text-decoration: none;
 }
-.share-song-btn:hover{
+.show-tracks-btn:hover{
     color: #000;
     cursor: pointer;
 }
 
-.share-song-btn:visited{
+.show-tracks-btn:visited{
     text-decoration: none;
 }
 
@@ -67,4 +68,35 @@ a, li, p, span {
     background-color: #1db954;
     color: #000;
     border-radius: 25px;
+}
+
+#tracks-list-holder{
+    display: none;
+}
+
+#share-btn{
+    display: none;
+    user-select: none;
+    margin: 0 auto;
+}
+
+.remove-btn-link{
+    display: block;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #dc3545;
+    padding: .25rem 0;
+    margin-top: .25rem;
+    user-select: none;
+}
+
+.remove-btn-link:hover{
+    background-color: rgba(220, 53, 69, 0.8);
+    color: #FFF;
+    cursor: pointer;
+}
+
+#loading-holder{
+    text-align: center;
+    display: none;
 }

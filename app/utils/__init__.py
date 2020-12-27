@@ -43,6 +43,7 @@ def extract_tracks_data(tracks: dict) -> list:
         tmp_dict['track_uri'] = item.get('uri')
         tmp_dict['explicit'] = item.get('explicit')
         tmp_dict['track_duration'] = calculate_track_duration(item.get('duration_ms'))
+        tmp_dict['artists_name'] = ', '.join([i['name'] for i in item.get('artists')])
         tracks_list.append(tmp_dict)
 
     return tracks_list
