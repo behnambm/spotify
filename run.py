@@ -1,8 +1,13 @@
 from app import create_app
 from os import getenv
 from flask import session
+from app.models import db
 
 app = create_app()
+
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 
 # to load variables(globally) inside jinja2 templates
