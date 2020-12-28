@@ -78,6 +78,17 @@ a, li, p, span {
     display: none;
     user-select: none;
     margin: 0 auto;
+    outline: none;
+    border: none;
+    background-color: #1db954;
+    color: #000;
+    font-weight: bold;
+    padding: 5px 64px;
+    border-radius: 3px;
+}
+
+#share-btn:hover {
+    box-shadow: 0 0 3px 0 #1db954;
 }
 
 .remove-btn-link{
