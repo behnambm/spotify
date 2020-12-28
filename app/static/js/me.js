@@ -10,6 +10,7 @@ $(document).ready(()=> {
             statusCode: {
                 200: (resp)=>{
                     $('#loading-holder').hide();
+                    $('#tracks-columns-holder').empty();
                     console.log(resp);
                     resp.forEach((track)=>{
                         let track_name = track['track_name'];
@@ -49,7 +50,10 @@ $(document).ready(()=> {
 
     // this function will execute when user removes a track
     $(document).on("click", ".remove-btn-link", (e)=>{
-        console.log($(this))
+        let trackRow = $(e.target).parents('tr');
+        trackRow.fadeOut('slow').delay(700).queue(()=>{
+            trackRow.remove()
+        })
     });
 
 });
