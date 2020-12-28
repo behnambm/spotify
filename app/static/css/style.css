@@ -111,3 +111,8 @@ a, li, p, span {
     text-align: center;
     display: none;
 }
+
+#tracks-final-count{
+    color: #57585B;
+    display: none;
+}

@@ -42,6 +42,8 @@ $(document).ready(()=> {
 
                         $('#tracks-list-holder').css('display', 'flex');
                         $('#share-btn').css('display', 'block');
+                        $('#tracks-final-count').text(resp.length + ' Tracks to share');
+                        $('#tracks-final-count').css('display', 'block');
                     })
                 }
             }
@@ -51,9 +53,19 @@ $(document).ready(()=> {
     // this function will execute when user removes a track
     $(document).on("click", ".remove-btn-link", (e)=>{
         let trackRow = $(e.target).parents('tr');
-        trackRow.fadeOut('slow').delay(700).queue(()=>{
-            trackRow.remove()
-        })
+        trackRow.fadeOut('slow').queue(()=>{
+            trackRow.remove();
+
+            let tracksCount = $('#tracks-columns-holder').children('tr').length;
+            if (tracksCount == 0){
+                $('#share-btn').hide();
+                $('#tracks-list-holder').hide();
+                $('#tracks-final-count').hide();
+            } else {
+                $('#tracks-final-count').text(tracksCount + ' Tracks to share');
+            }
+
+        });
     });
 
 });
