@@ -68,4 +68,12 @@ $(document).ready(()=> {
         });
     });
 
+    // when user clicks on `Share` button this function will get all present tracks and send them
+    // to server to be saved as users top tracks playlist.
+    $(document).on('click', '#share-btn', (e)=>{
+        let allPresentTracks = [];
+        $('#tracks-columns-holder').children('tr').each((index, element)=>{
+           allPresentTracks.push($(element).data('uri'));
+        });
+    });
 });
