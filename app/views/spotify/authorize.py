@@ -1,4 +1,4 @@
-from flask import Blueprint, url_for, redirect, session, request, flash
+from flask import Blueprint, url_for, redirect, session
 from app.auth import spotify
 from urllib.parse import urljoin, urlparse
 import os
@@ -10,17 +10,19 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/spotify')
 @auth_bp.route('/authorize/')
 def auth_user():
     """
-    This endpoint will authorize the user and after that oauth-server will redirect the user
-    to `callback` endpoint.
+    This endpoint will authorize the user and after that oauth-server will
+    redirect the user to `callback` endpoint.
     """
-    return spotify.authorize(callback=url_for('auth.auth_callback', _external=True))
+    return spotify.authorize(
+        callback=url_for('auth.auth_callback', _external=True)
+    )
 
 
 @auth_bp.route('/authorize/callback/')
 def auth_callback():
     """
-    User after authorization will be redirected here and the request contains the authentication
-    data. e.g. JWT, Expiration date, scope, etc.
+    User after authorization will be redirected here and the request
+    contains the authentication data. e.g. JWT, Expiration date, scope, etc.
     """
     resp = spotify.authorized_response()
     if resp is None or resp.get('access_token') is None:
@@ -46,7 +48,8 @@ def add_version_to_api_url(uri, headers, body):
     endpoint = url.path
 
     proper_hostname = urljoin(
-        url.scheme + '://' + url.hostname,  # generating the base url. e.g. https://example.com
+        # generating the base url. e.g. https://example.com
+        url.scheme + '://' + url.hostname,
         os.getenv('SPOTIFY_API_VERSION')
     )
 

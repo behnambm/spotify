@@ -5,7 +5,8 @@ import time
 
 db = SQLAlchemy()
 
-association_table = db.Table('spotify_association',
+association_table = db.Table(
+    'spotify_association',
     db.Column('playlist_id', db.Integer, db.ForeignKey('spotify_playlists.id')),
     db.Column('track_id', db.Integer, db.ForeignKey('spotify_tracks.id'))
 )

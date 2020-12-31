@@ -1,7 +1,7 @@
 """
-This endpoint is to get users top 10 tracks in a json format 
+This endpoint is to get users top 10 tracks in a json format
 """
-from flask import Blueprint, jsonify,  request, session
+from flask import Blueprint, jsonify, request
 from app.auth import spotify
 from app.schema.playlist import PlaylistSchema
 from app.utils import extract_tracks_data, login_required

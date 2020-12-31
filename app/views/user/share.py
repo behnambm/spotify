@@ -19,7 +19,7 @@ def share_tracks():
 
     try:
         user_uris = json.loads(user_uris)
-    except:
+    except Exception:
         return 'bad request', 400
 
     if session.get('playlist_data') is None:

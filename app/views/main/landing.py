@@ -2,7 +2,7 @@
 This view is for landing_bp page
 landing_bp page is the first page that user will see when opens the root URL
 """
-from flask import render_template, Blueprint, session, redirect, url_for
+from flask import render_template, Blueprint
 
 landing_bp = Blueprint('landing', __name__)
 
