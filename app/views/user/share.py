@@ -22,9 +22,6 @@ def share_tracks():
     except Exception:
         return 'bad request', 400
 
-    if session.get('playlist_data') is None:
-        return 'server error', 500
-
     new_playlist = PlaylistModel(
         playlist_name=session.get('display_name'),
         owner_user_id=session.get('user_id')
@@ -34,6 +31,5 @@ def share_tracks():
         new_playlist.tracks.append(TracksModel.find_by_uri(uri))
 
     new_playlist.save_to_db()
-    print(new_playlist.tracks)
 
     return 'this will change', 201
