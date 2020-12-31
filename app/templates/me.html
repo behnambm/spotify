@@ -57,7 +57,11 @@
         <span id="tracks-final-count"></span>
     </div>
     <div class="col-4" style="text-align: center;">
-        <button id="share-btn">Share</button>
+        <button id="share-btn">
+            <span>Share</span>
+            <img src="{{ url_for('static', filename='images/btn-loading.gif') }}">
+        </button>
+
     </div>
 </div>
 {% endblock %}

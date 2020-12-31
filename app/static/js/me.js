@@ -68,12 +68,30 @@ $(document).ready(()=> {
         });
     });
 
+    // prepare share-btn to show loading
+    function showLoading(){
+        $('#share-btn span').hide();
+        $('#share-btn img').show();
+        $('#share-btn').addClass('show-share-btn-loading');
+        $('#share-btn').addClass('disabled')
+    }
+
     // when user clicks on `Share` button this function will get all present tracks and send them
     // to server to be saved as users top tracks playlist.
     $(document).on('click', '#share-btn', (e)=>{
-        let allPresentTracks = [];
-        $('#tracks-columns-holder').children('tr').each((index, element)=>{
-           allPresentTracks.push($(element).data('uri'));
-        });
+        if (!$('#share-btn').hasClass('disabled')){  // btn is not in loading mode and we can send ajax
+            let allPresentTracks = [];
+            showLoading();
+            $('#tracks-columns-holder').children('tr').each((index, element)=>{
+               allPresentTracks.push($(element).data('uri'));
+            });
+            console.log(allPresentTracks)
+            $.ajax({
+                url: '/me/share/',
+                type: 'POST',
+                data: {'uris': JSON.stringify(allPresentTracks)}
+            })
+        }
+
     });
 });

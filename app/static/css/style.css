@@ -81,10 +81,13 @@ a, li, p, span {
     outline: none;
     border: none;
     background-color: #1db954;
-    color: #000;
     font-weight: bold;
     padding: 5px 64px;
     border-radius: 3px;
+}
+
+#share-btn span{
+    color: #000;
 }
 
 #share-btn:hover {
@@ -115,4 +118,12 @@ a, li, p, span {
 #tracks-final-count{
     color: #57585B;
     display: none;
+}
+
+#share-btn img{
+    display: none;
+}
+
+.show-share-btn-loading{
+    background-color: #000 !important;
 }
