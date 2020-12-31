@@ -1,7 +1,7 @@
 """
 Users in this view can access their personal info
 """
-from flask import Blueprint, render_template, request, abort
+from flask import Blueprint, render_template, request, abort, session
 from app.auth import spotify
 from app.utils import login_required
 from app.errors import TokenExpired
@@ -19,6 +19,9 @@ def my_page():
 
     if me.status != 200:
         abort(500)
+
+    session['user_id'] = me.data.get('id')
+    session['display_name'] = me.data.get('display_name')
 
     return render_template(
         'me.html',
