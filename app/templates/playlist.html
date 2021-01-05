@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{ playlist_name }}{% endblock %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <img src="{{ avatar_url }}" class="avatar-img">
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-4 offset-lg-4" style="text-align: center">
+        <h3 class="user-info-list-item">{{ playlist_name }}</h3>
+        {# TODO: add `edit` icon & modal #}
+    </div>
+</div>
+<br><br>
+<div class="row justify-content-center" id="playlist-tracks-list-holder">
+    <div class="col-10">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th scope="col">TITLE</th>
+              <th scope="col">ARTIST</th>
+              <th scope="col">ALBUM</th>
+            </tr>
+          </thead>
+          <tbody id="tracks-columns-holder">
+          {% for track in tracks %}
+            <tr data-uri="{{ track['track_uri'] }}">
+                <td>{{ track['track_name'] }}</td>
+                <td>{{ track['artists_name'] }}</td>
+                <td>{{ track['album_name'] }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

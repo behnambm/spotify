@@ -4,6 +4,7 @@ from app.views.spotify import authorize
 from app.views.user import me, top_tracks, share
 from app.auth import oauth
 from app.errors import errors_bp
+from app.views.playlist import playlist_bp
 import os
 
 
@@ -23,3 +24,4 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(errors_bp)
     app.register_blueprint(top_tracks.top_tracks_bp)
     app.register_blueprint(share.share_bp)
+    app.register_blueprint(playlist_bp)
