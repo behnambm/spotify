@@ -76,6 +76,24 @@ $(document).ready(()=> {
         $('#share-btn').addClass('disabled')
     }
 
+    function hideLoading() {
+        $('#share-btn span').show();
+        $('#share-btn img').hide();
+        $('#share-btn').removeClass('show-share-btn-loading');
+        $('#share-btn').removeClass('disabled');
+    }
+
+    // show an alert with danger theme
+    function showDangerAlert(text){
+        let htmlText = `
+        <div class="alert alert-danger alert-dismissible fade show custom-danger-alert" role="alert">
+            ${text}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `;
+        $('body').prepend(htmlText);
+    }
+
     // when user clicks on `Share` button this function will get all present tracks and send them
     // to server to be saved as users top tracks playlist.
     $(document).on('click', '#share-btn', (e)=>{
@@ -89,7 +107,15 @@ $(document).ready(()=> {
             $.ajax({
                 url: '/me/share/',
                 type: 'POST',
-                data: {'uris': JSON.stringify(allPresentTracks)}
+                data: {'uris': JSON.stringify(allPresentTracks)},
+                statusCode: {
+                    409: (resp)=>{
+                        let aTag = '<a target="_blank" href="' + resp.responseJSON['url'] + '">here</a>';
+                        let message = 'You already have shared a playlist. Click ' + aTag + ' to see.';
+                        showDangerAlert(message);
+                        hideLoading();
+                    }
+                }
             })
         }
 

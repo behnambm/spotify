@@ -127,3 +127,11 @@ a, li, p, span {
 .show-share-btn-loading{
     background-color: #000 !important;
 }
+
+.custom-danger-alert{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    width: 100%;
+}
