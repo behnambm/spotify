@@ -1,7 +1,7 @@
 """
 This view is to save the tracks that user wants to share
 """
-from flask import Blueprint, session, request
+from flask import Blueprint, session, request, jsonify, url_for
 from app.utils import login_required
 import json
 from app.models import PlaylistModel, TracksModel
@@ -21,6 +21,13 @@ def share_tracks():
         user_uris = json.loads(user_uris)
     except Exception:
         return 'bad request', 400
+
+    playlist = PlaylistModel.find_by_user_id(session.get('user_id'))
+    if playlist:
+        return jsonify(
+            message='already shared',
+            url=url_for('playlist.index', playlist_id=playlist.id)
+        ), 409
 
     new_playlist = PlaylistModel(
         playlist_name=session.get('display_name'),
