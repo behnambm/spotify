@@ -40,4 +40,4 @@ def share_tracks():
 
     new_playlist.save_to_db()
 
-    return 'this will change', 201
+    return url_for('playlist.index', playlist_id=new_playlist.id), 201

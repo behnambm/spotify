@@ -114,6 +114,9 @@ $(document).ready(()=> {
                         let message = 'You already have shared a playlist. Click ' + aTag + ' to see.';
                         showDangerAlert(message);
                         hideLoading();
+                    },
+                    201: (resp)=>{
+                        window.location.replace(resp);
                     }
                 }
             })
