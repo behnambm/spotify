@@ -159,3 +159,25 @@ a, li, p, span {
 .user-playlist-link a:hover{
     color: #1db954;
 }
+
+.delete-modal-button{
+    padding: 5px 50px;
+    border-radius: 30px;
+}
+
+.modal-footer{
+    border-top: none;
+}
+
+.modal-footer .btn{
+    width: 100%;
+}
+
+#import-playlist-btn{
+    background-color: #1db954;
+    outline: none;
+    border: none;
+    padding: 5px 50px;
+    color: #FFF;
+    border-radius: 30px;
+}

@@ -3,18 +3,37 @@
 
 {% block content %}
 
-<br>
 <div class="row">
     <img src="{{ avatar_url }}" class="playlist-img">
 </div>
 <br>
+
 <div class="row">
     <div class="col-lg-4 offset-lg-4" style="text-align: center">
         <h3 class="user-info-list-item">{{ playlist_name }}</h3>
         {# TODO: add `edit` icon & modal #}
     </div>
 </div>
+<br>
+<div class="row">
+    <div class="col-lg-6" style="text-align: right">
+        {% if logged_in %}
+        <button  class="btn btn-danger delete-modal-button" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
+        {% endif %}
+    </div>
+
+    <div class="col-lg-6" style="text-align: left">
+        <button id="import-playlist-btn">Import
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
+          <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+        </svg>
+        </button>
+    </div>
+</div>
+
 <br><br>
+
 <div class="row justify-content-center" id="playlist-tracks-list-holder">
     <div class="col-10">
         <table class="table table-dark table-hover">
@@ -37,5 +56,42 @@
         </table>
     </div>
 </div>
+{% endblock %}
 
+{% block modals %}
+<!-- Modal to confirm playlist deletion -->
+
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="delete-modalLabel">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this playlist?
+      </div>
+      <div class="modal-footer justify-content-center">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-6" style="text-align: center">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                  </div>
+                  <div class="col-lg-6" style="text-align: center">
+                      <button type="button" class="btn btn-success">Delete</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- end of modal for deletion -->
+{% endblock %}
+
+{% block footer_scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/playlist.js') }}"></script>
 {% endblock %}

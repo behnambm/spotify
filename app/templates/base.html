@@ -64,7 +64,9 @@
   <div class="container-fluid">
     {% block content %}
     {% endblock %}
+
   </div>
+{% block modals %}{% endblock %}
 
   {% block footer_scripts %}
     <script src="{{ url_for('static', filename='js/jquery-3.5.1.js') }}"></script>
