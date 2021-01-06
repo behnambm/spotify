@@ -21,5 +21,5 @@ def index(playlist_id: str):
         'playlist.html',
         tracks=json.loads(tracks),
         playlist_name=playlist.playlist_name,
-        avatar_url='sdf'
+        avatar_url=playlist.playlist_image_url,
     )

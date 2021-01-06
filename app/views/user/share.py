@@ -31,7 +31,8 @@ def share_tracks():
 
     new_playlist = PlaylistModel(
         playlist_name=session.get('display_name'),
-        owner_user_id=session.get('user_id')
+        owner_user_id=session.get('user_id'),
+        playlist_image_url=session.get('avatar_url')
     )
 
     for uri in user_uris:

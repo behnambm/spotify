@@ -22,6 +22,7 @@ def my_page():
 
     session['user_id'] = me.data.get('id')
     session['display_name'] = me.data.get('display_name')
+    session['avatar_url'] = me.data['images'][0]['url']
 
     return render_template(
         'me.html',

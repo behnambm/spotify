@@ -20,6 +20,7 @@ class PlaylistModel(db.Model):
     import_count = db.Column(db.Integer, nullable=False, default=0)
     owner_user_id = db.Column(db.String)
     created_at = db.Column(db.Float, default=time.time)
+    playlist_image_url = db.Column(db.String, nullable=False)
     tracks = db.relationship('TracksModel', secondary=association_table)
 
     def __init__(self, **kwargs) -> None:
