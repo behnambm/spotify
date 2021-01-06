@@ -144,3 +144,18 @@ a, li, p, span {
     display: block;
     margin: 0 auto;
 }
+
+.user-playlist-link{
+    display: block;
+    color: #1db954;
+}
+
+.user-playlist-link a{
+    color: #FFFFFF;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.user-playlist-link a:hover{
+    color: #1db954;
+}
