@@ -17,12 +17,17 @@ def index(playlist_id: str):
     playlist = PlaylistModel.find_by_id_or_404(playlist_id)
 
     tracks = playlist_schema.dumps(playlist.tracks)
-    # TODO: add `is_owner` flag, then user can edit playlist's name
+
+    is_owner = False
+    if playlist.owner_user_id == session.get('user_id'):
+        is_owner = True
+
     return render_template(
         'playlist.html',
         tracks=json.loads(tracks),
         playlist_name=playlist.playlist_name,
         avatar_url=playlist.playlist_image_url,
+        is_owner=is_owner,
     )
 
 
