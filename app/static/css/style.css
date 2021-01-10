@@ -181,3 +181,20 @@ a, li, p, span {
     color: #FFF;
     border-radius: 30px;
 }
+
+.edit-playlist-name{
+    color: #509bf5;
+}
+
+.edit-playlist-name:hover{
+    cursor: pointer;
+}
+
+#button-save-edit-name{
+    border-color: #509bf5;
+}
+
+#button-save-edit-name:hover{
+    background-color: #509bf5;
+    color: #FFF;
+}
