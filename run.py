@@ -1,7 +1,7 @@
 from app import create_app
 from os import getenv
 from flask import session
-from app.models import db
+from app.models import db, PlaylistModel
 
 app = create_app()
 
@@ -19,5 +19,6 @@ def inject_data_to_template():
 
     return dict(
         app_title=getenv('APP_TITLE'),
-        logged_in=logged_in
+        logged_in=logged_in,
+        count_of_playlists=PlaylistModel.query.count(),
     )
