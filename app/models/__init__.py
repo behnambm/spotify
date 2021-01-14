@@ -21,7 +21,7 @@ class PlaylistModel(db.Model):
     owner_user_id = db.Column(db.String)
     created_at = db.Column(db.Float, default=time.time)
     playlist_image_url = db.Column(db.String, nullable=False)
-    tracks = db.relationship('TracksModel', secondary=association_table)
+    tracks = db.relationship('TracksModel', secondary=association_table, lazy='dynamic')
 
     def __init__(self, **kwargs) -> None:
         self.id = uuid4().hex
