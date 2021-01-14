@@ -8,5 +8,14 @@
 {% endblock %}
 
 {% block content %}
-<span>{{logged_in}}</span>
+    <div class="row">
+    {% for playlist in playlists %}
+        <div class="col-lg-3 main-playlist-item">
+            <a href="{{ url_for('playlist.index', playlist_id=playlist.id) }}">
+                <img src="{{ playlist.playlist_image_url }}">
+                <h4>{{ playlist.playlist_name|truncate(25) }}</h4>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
 {% endblock %}
