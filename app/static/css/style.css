@@ -14,7 +14,7 @@
 body{
     background-color: #222326;
 }
-a, li, p, span {
+a, li, p, span, h4 {
     color: #FFF;
 }
 
@@ -197,4 +197,28 @@ a, li, p, span {
 #button-save-edit-name:hover{
     background-color: #509bf5;
     color: #FFF;
+}
+
+.main-playlist-item{
+    text-align: center;
+    margin-top: 20px;
+}
+.main-playlist-item img{
+    object-fit: cover;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+}
+
+.main-playlist-item a{
+    text-decoration: none;
+}
+
+.main-playlist-item a:hover{
+    cursor: pointer;
+}
+
+.main-playlist-item h4{
+    color: #1db954;
+    margin-top: 15px;
 }
