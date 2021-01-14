@@ -27,11 +27,11 @@ class PlaylistModel(db.Model):
         self.id = uuid4().hex
         super().__init__(**kwargs)
 
-    def save_to_db(self):
+    def save_to_db(self) -> None:
         db.session.add(self)
         db.session.commit()
 
-    def delete_from_db(self):
+    def delete_from_db(self) -> None:
         db.session.delete(self)
         db.session.commit()
 
@@ -54,7 +54,7 @@ class TracksModel(db.Model):
     explicit = db.Column(db.Boolean)
     track_duration = db.Column(db.String)
 
-    def save_to_db(self):
+    def save_to_db(self) -> None:
         db.session.add(self)
         db.session.commit()
 

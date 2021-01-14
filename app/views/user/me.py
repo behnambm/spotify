@@ -24,7 +24,6 @@ def my_page():
     session['user_id'] = me.data.get('id')
     session['display_name'] = me.data.get('display_name')
     if len(me.data.get('images')) > 0:
-        print('fuck')
         session['avatar_url'] = me.data['images'][0]['url']
     else:
         session['avatar_url'] = url_for('static', filename='images/spotify_icon.png', _external=True)

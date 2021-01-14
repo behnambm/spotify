@@ -48,6 +48,7 @@ a, li, p, span, h4 {
     border-radius: 25px;
     text-decoration: none;
 }
+
 .show-tracks-btn:hover{
     color: #000;
     cursor: pointer;

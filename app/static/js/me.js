@@ -11,7 +11,6 @@ $(document).ready(()=> {
                 200: (resp)=>{
                     $('#loading-holder').hide();
                     $('#tracks-columns-holder').empty();
-                    console.log(resp);
                     resp.forEach((track)=>{
                         let track_name = track['track_name'];
                         let album_name = track['album_name'];
@@ -72,15 +71,13 @@ $(document).ready(()=> {
     function showLoading(){
         $('#share-btn span').hide();
         $('#share-btn img').show();
-        $('#share-btn').addClass('show-share-btn-loading');
-        $('#share-btn').addClass('disabled')
+        $('#share-btn').addClass('show-share-btn-loading').addClass('disabled');
     }
 
     function hideLoading() {
         $('#share-btn span').show();
         $('#share-btn img').hide();
-        $('#share-btn').removeClass('show-share-btn-loading');
-        $('#share-btn').removeClass('disabled');
+        $('#share-btn').removeClass('show-share-btn-loading').removeClass('disabled');
     }
 
     // show an alert with danger theme

@@ -18,6 +18,6 @@ spotify = oauth.remote_app(
 
 
 @spotify.tokengetter
-def get_spotify_access_token():
+def get_spotify_access_token() -> str:
     if 'access_token' in session:
         return session.get('access_token')
