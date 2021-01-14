@@ -1,7 +1,7 @@
 """
 Users in this view can access their personal info
 """
-from flask import Blueprint, render_template, request, abort, session
+from flask import Blueprint, render_template, request, abort, session, url_for
 from app.auth import spotify
 from app.utils import login_required
 from app.errors import TokenExpired
@@ -23,7 +23,11 @@ def my_page():
 
     session['user_id'] = me.data.get('id')
     session['display_name'] = me.data.get('display_name')
-    session['avatar_url'] = me.data['images'][0]['url']
+    if len(me.data.get('images')) > 0:
+        print('fuck')
+        session['avatar_url'] = me.data['images'][0]['url']
+    else:
+        session['avatar_url'] = url_for('static', filename='images/spotify_icon.png', _external=True)
 
     user_playlist = PlaylistModel.find_by_user_id(me.data.get('id'))
 
@@ -31,6 +35,6 @@ def my_page():
         'me.html',
         data=me.data,
         active='profile',
-        avatar_url=me.data['images'][0]['url'],
+        avatar_url=session.get('avatar_url'),
         user_playlist=user_playlist,
     )
