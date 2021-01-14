@@ -26,7 +26,7 @@
 <br>
 <div class="row">
     <div class="col-lg-6" style="text-align: right">
-        {% if logged_in %}
+        {% if logged_in and is_owner %}
         <button  class="btn btn-danger delete-modal-button" data-bs-toggle="modal" data-bs-target="#delete-modal">Delete</button>
         {% endif %}
     </div>
