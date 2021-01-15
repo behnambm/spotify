@@ -223,3 +223,29 @@ a, li, p, span, h4 {
     color: #1db954;
     margin-top: 15px;
 }
+
+.pagination-div{
+    padding: 40px;
+}
+
+.pagination-div strong{
+    background-color: #1ed760;
+    padding: 7px 12px;
+    border-radius: 50%;
+    margin: 0 3px;
+}
+
+.pagination-div a.pagination-link{
+    padding: 6px 11px;
+    border-radius: 50%;
+    margin: 0 3px;
+    border: 1px solid #1ed760;
+    text-decoration: none;
+    color: #1ed760;
+    transition: all 0.3s ease;
+}
+
+.pagination-div a.pagination-link:hover {
+    background-color: #1ed760;
+    color: #000000;
+}

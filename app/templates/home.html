@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% from 'macros/paginate.html' import render_pagination %}
 {% block title %}Index{% endblock %}
 
 {% block alerts %}
@@ -17,5 +17,10 @@
             </a>
         </div>
     {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4" style="text-align: center">
+            {{ render_pagination(pagination, 'landing.landing_page') }}
+        </div>
     </div>
 {% endblock %}
