@@ -249,3 +249,10 @@ a, li, p, span, h4 {
     background-color: #1ed760;
     color: #000000;
 }
+
+.main-not-found{
+    color: #FFF;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+}
