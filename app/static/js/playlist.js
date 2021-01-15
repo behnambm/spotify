@@ -24,12 +24,15 @@ $(document).ready(()=> {
             url: window.location.pathname.split('/')[2] + '/change-name',
             type: 'PUT',
             data: {'new_name': playlistCurrentName},
-            success: (resp) => {
-                $('#playlist-display-name').text(resp);
-                $('#edit-name-modal').modal('hide');
-            },
-            fail: (resp) => {
-                alert('something went wrong!')
+            statusCode: {
+                200: (resp) => {
+                    $('#playlist-display-name').text(resp);
+                    $('#edit-name-modal').modal('hide');
+                    $('#edit-name-modal .empty-name-error').hide();
+                },
+                400: (resp) => {
+                    $('#edit-name-modal .empty-name-error').show();
+                }
             }
         })
     })

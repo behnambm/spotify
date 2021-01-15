@@ -50,6 +50,9 @@ def change_display_name(playlist_id):
     if not playlist.owner_user_id == session.get('user_id'):
         abort(401)
 
+    if request.form.get('new_name').strip() is '':
+        return str('cannot be empty'), 400
+
     playlist.playlist_name = request.form.get('new_name')
     playlist.save_to_db()
 

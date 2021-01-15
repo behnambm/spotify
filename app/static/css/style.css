@@ -256,3 +256,10 @@ a, li, p, span, h4 {
     text-align: center;
     margin-top: 20px;
 }
+
+.empty-name-error{
+    color: #f32e2e;
+    display: block;
+    font-size: 12px;
+    display: none;
+}
