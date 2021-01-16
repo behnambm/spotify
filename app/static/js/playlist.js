@@ -36,4 +36,19 @@ $(document).ready(()=> {
             }
         })
     })
+
+    // import playlist
+    $('#import-playlist-btn').click((e) => {
+        let playlistId = window.location.pathname.split('/')[2];
+        $.ajax({
+            url: 'import',
+            type: 'POST',
+            data: {'playlist_id': playlistId},
+            statusCode: {
+                201: (resp) => {
+                    console.log('ok')
+                }
+            }
+        })
+    })
 });
