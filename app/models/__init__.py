@@ -43,6 +43,10 @@ class PlaylistModel(db.Model):
     def find_by_id_or_404(cls, playlist_id: str) -> Union['PlaylistModel', None]:
         return cls.query.filter_by(id=playlist_id).first_or_404()
 
+    @classmethod
+    def find_by_id(cls, playlist_id: str) -> Union[None, 'PlaylistModel']:
+        return cls.query.filter_by(id=playlist_id).first()
+
 
 class TracksModel(db.Model):
     __tablename__ = 'spotify_tracks'
