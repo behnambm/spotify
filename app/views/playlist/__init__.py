@@ -50,7 +50,7 @@ def change_display_name(playlist_id):
     if not playlist.owner_user_id == session.get('user_id'):
         abort(401)
 
-    if request.form.get('new_name').strip() is '':
+    if request.form.get('new_name').strip() == '':
         return str('cannot be empty'), 400
 
     playlist.playlist_name = request.form.get('new_name')
@@ -75,7 +75,7 @@ def import_playlist():
     if new_playlist_id is None:
         return 'server side error', 500
 
-    # todo: get a list of tracks uris and add them to new playlist
-    add_tracks_to_playlist()
+    uris_list = playlist_obj.get_uris_list(playlist_id=playlist_id)
+    add_tracks_to_playlist(track_uris=uris_list, playlist_id=new_playlist_id)
 
     return 'playlist created successfully', 201
