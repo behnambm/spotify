@@ -41,14 +41,23 @@ $(document).ready(()=> {
     $('#import-playlist-btn').click((e) => {
         let playlistId = window.location.pathname.split('/')[2];
         $.ajax({
-            url: 'import',
+            url: 'import/',
             type: 'POST',
             data: {'playlist_id': playlistId},
+            beforeSend: () => {
+                let importBtn = $('#import-playlist-btn');
+                importBtn.children('img').show();
+                importBtn.children('span').hide();
+                importBtn.addClass('show-loading-style');
+            },
             statusCode: {
                 201: (resp) => {
-                    console.log('ok')
+                    let importBtn = $('#import-playlist-btn');
+                    importBtn.children('img').hide();
+                    importBtn.children('span').show();
+                    importBtn.removeClass('show-loading-style');
                 }
-            }
+            },
         })
     })
 });

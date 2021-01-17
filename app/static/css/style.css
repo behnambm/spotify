@@ -263,3 +263,12 @@ a, li, p, span, h4 {
     font-size: 12px;
     display: none;
 }
+
+#import-playlist-btn > img{
+    display: none;
+}
+
+.show-loading-style{
+    background-color: #000 !important;
+    box-shadow: 0 0 3px 0 #1db954;
+}
