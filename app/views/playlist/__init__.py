@@ -5,7 +5,7 @@ endpoint will be like this: /playlist/<PLAYLIST_ID>
 from flask import Blueprint, render_template, session, abort, url_for, request
 from app.models import PlaylistModel
 from app.schema.playlist import PlaylistSchema
-from app.utils import login_required
+from app.utils import login_required, create_playlist, add_tracks_to_playlist
 import json
 
 playlist_bp = Blueprint('playlist', __name__, url_prefix='/playlist/')
@@ -57,3 +57,25 @@ def change_display_name(playlist_id):
     playlist.save_to_db()
 
     return str(playlist.playlist_name), 200
+
+
+@playlist_bp.route('/import/', methods=['GET', 'POST'])
+@login_required
+def import_playlist():
+    playlist_id = request.form.get('playlist_id')
+    if playlist_id is None:
+        return 'no playlist id', 400
+
+    playlist_obj = PlaylistModel.find_by_id(playlist_id)
+    if not playlist_obj:
+        abort(404)
+
+    new_playlist_id = create_playlist(playlist_obj.playlist_name)
+
+    if new_playlist_id is None:
+        return 'server side error', 500
+
+    # todo: get a list of tracks uris and add them to new playlist
+    add_tracks_to_playlist()
+
+    return 'playlist created successfully', 201

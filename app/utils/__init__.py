@@ -1,6 +1,10 @@
 from flask import session, flash, redirect, url_for
 from functools import wraps
 from base64 import b64encode
+from requests import post
+import json
+from typing import Union
+from app.utils.errors import TokenExpired
 
 
 def login_required(f):
@@ -60,3 +64,44 @@ def generate_basic_authorization_value(consumer_id: str, consumer_secret: str) -
     """
     proper_str = ':'.join([consumer_id, consumer_secret])
     return b64encode(proper_str.encode())
+
+
+def create_playlist(name: str) -> Union[None, dict]:
+    """
+    This function will send a POST request to https://api.spotify.com/v1/users/{user_id}/playlists
+    to create a new playlist.
+    :return: useful parts of Spotify Playlist object
+    """
+    header = {
+        'Authorization': 'Bearer ' + str(session.get('access_token')),
+        'Content-Type': 'application/json'
+    }
+
+    data = {
+        'name': name,
+        'description': 'This playlist was imported from Spotify Taste (https://spotifytaste.herokuapp.com)'
+    }
+    try:
+        resp = post(
+            url=f'https://api.spotify.com/v1/users/{session.get("user_id")}/playlists',
+            headers=header,
+            data=json.dumps(data)
+        )
+    except Exception as e:
+        # todo: add logging
+        return None
+
+    if resp.status_code == 200 or resp.status_code == 201:
+        return json.loads(resp.text).get('id')
+
+    if resp.status_code == 401:
+        # todo: handle token expiration
+        # return create_playlist(name=name)
+        pass
+
+    return None
+
+
+def add_tracks_to_playlist(track_uris: list, playlist_id):
+    pass
+    # POST https://api.spotify.com/v1/playlists/{playlist_id}/tracks
