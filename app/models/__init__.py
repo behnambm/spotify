@@ -47,6 +47,14 @@ class PlaylistModel(db.Model):
     def find_by_id(cls, playlist_id: str) -> Union[None, 'PlaylistModel']:
         return cls.query.filter_by(id=playlist_id).first()
 
+    @classmethod
+    def get_uris_list(cls, playlist_id: str):
+        """
+        :returns a list of track uris (str) in this format 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh'
+        """
+        playlist = cls.query.filter_by(id=playlist_id).first()
+        return [track.track_uri for track in playlist.tracks.all()]
+
 
 class TracksModel(db.Model):
     __tablename__ = 'spotify_tracks'
