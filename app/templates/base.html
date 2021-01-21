@@ -27,9 +27,9 @@
 
                 <li class="nav-item">
                 {% if active == 'most-imported' %}
-                    <a class="nav-link active" href="{{ url_for('me.my_page') }}">Most imported </a>
+                    <a class="nav-link active" href="{{ url_for('playlist.top_playlists') }}">Most imported </a>
                 {% else %}
-                    <a class="nav-link" href="{{ url_for('me.my_page') }}">Most imported </a>
+                    <a class="nav-link" href="{{ url_for('playlist.top_playlists') }}">Most imported </a>
                 {% endif %}
                 </li>
 

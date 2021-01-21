@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% from 'macros/paginate.html' import render_pagination %}
+{% block title %}Top{% endblock %}
+
+{% block alerts %}
+    {% from 'macros/alerts.html' import show_alerts %}
+    {{ show_alerts('error') }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+    {% if playlists %}
+    {% for playlist in playlists %}
+        <div class="col-lg-3 main-playlist-item">
+            <a href="{{ url_for('playlist.index', playlist_id=playlist.id) }}">
+                <img src="{{ playlist.playlist_image_url }}">
+                <h4>{{ playlist.playlist_name|truncate(25) }}</h4>
+            </a>
+        </div>
+    {% endfor %}
+    {% else %}
+        <div class="col-lg-4 offset-lg-4 main-not-found">Not found.</div>
+    {% endif %}
+    </div>
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4" style="text-align: center">
+            {{ render_pagination(pagination, 'playlist.top_playlists') }}
+        </div>
+    </div>
+{% endblock %}

@@ -89,3 +89,21 @@ def import_playlist():
     playlist_obj.save_to_db()
 
     return 'playlist created successfully', 201
+
+
+@playlist_bp.route('/top/')
+def top_playlists():
+    """
+    This endpoint shows most imported playlists
+    """
+    page = request.args.get('page', 1, type=int)
+    playlists = PlaylistModel.query.filter(PlaylistModel.import_count > 0).order_by(PlaylistModel.import_count.desc()).paginate(
+        page=page, per_page=8, error_out=False
+    )
+
+    return render_template(
+        'top.html',
+        playlists=playlists.items,
+        pagination=playlists,  # this is a pagination object,
+        active='most-imported',
+    )
