@@ -53,6 +53,8 @@ class PlaylistModel(db.Model):
         :returns a list of track uris (str) in this format 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh'
         """
         playlist = cls.query.filter_by(id=playlist_id).first()
+        if playlist.tracks.count() == 0:
+            return None
         return [track.track_uri for track in playlist.tracks.all()]
 
 

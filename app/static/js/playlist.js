@@ -37,6 +37,21 @@ $(document).ready(()=> {
         })
     })
 
+    function showImportButtonLoading(){
+        let importBtn = $('#import-playlist-btn');
+        importBtn.disabled = true;
+        importBtn.children('img').show();
+        importBtn.children('span').hide();
+        importBtn.addClass('show-loading-style');
+    }
+
+    function hideImportButtonLoading(){
+        let importBtn = $('#import-playlist-btn');
+        importBtn.disabled = false;
+        importBtn.children('img').hide();
+        importBtn.children('span').show();
+        importBtn.removeClass('show-loading-style');
+    }
     // import playlist
     $('#import-playlist-btn').click((e) => {
         let playlistId = window.location.pathname.split('/')[2];
@@ -45,17 +60,30 @@ $(document).ready(()=> {
             type: 'POST',
             data: {'playlist_id': playlistId},
             beforeSend: () => {
-                let importBtn = $('#import-playlist-btn');
-                importBtn.children('img').show();
-                importBtn.children('span').hide();
-                importBtn.addClass('show-loading-style');
+                showImportButtonLoading();
             },
             statusCode: {
                 201: (resp) => {
-                    let importBtn = $('#import-playlist-btn');
-                    importBtn.children('img').hide();
-                    importBtn.children('span').show();
-                    importBtn.removeClass('show-loading-style');
+                    hideImportButtonLoading();
+                },
+                400: (resp) => {
+                    let serverMessage = resp.responseJSON['message'];
+                    let serverResponseElement = $('#server-message');
+                    if(serverMessage == 'no items to add'){
+                        serverResponseElement.text('Error! There is no tracks to add to your playlist');
+                    } else if (serverMessage == 'no playlist id'){
+                        serverResponseElement.text('Error! It seems web page is not loaded properly. Please refresh the page.');
+                    }
+                    serverResponseElement.show();
+                    serverResponseElement.delay(4000).fadeOut();
+                    hideImportButtonLoading()
+                },
+                401: () => {
+                    hideImportButtonLoading();
+                    let serverResponseElement = $('#server-message');
+                    serverResponseElement.text('Please sign in first!');
+                    serverResponseElement.show();
+                    serverResponseElement.delay(4000).fadeOut();
                 }
             },
         })

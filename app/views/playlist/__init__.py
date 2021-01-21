@@ -2,7 +2,7 @@
 This view is going to show playlists info
 endpoint will be like this: /playlist/<PLAYLIST_ID>
 """
-from flask import Blueprint, render_template, session, abort, url_for, request
+from flask import Blueprint, render_template, session, abort, url_for, request, jsonify
 from app.models import PlaylistModel
 from app.schema.playlist import PlaylistSchema
 from app.utils import login_required, create_playlist, add_tracks_to_playlist
@@ -60,22 +60,32 @@ def change_display_name(playlist_id):
 
 
 @playlist_bp.route('/import/', methods=['GET', 'POST'])
-@login_required
 def import_playlist():
+    # check if user is logged in
+    if session.get('access_token') is None:
+        return 'unauthorized', 401
+
     playlist_id = request.form.get('playlist_id')
     if playlist_id is None:
-        return 'no playlist id', 400
+        return jsonify(message='no playlist id'), 400
 
     playlist_obj = PlaylistModel.find_by_id(playlist_id)
     if not playlist_obj:
         abort(404)
 
+    uris_list = playlist_obj.get_uris_list(playlist_id=playlist_id)
+    if uris_list is None:
+        return jsonify(message='no items to add'), 400
+
     new_playlist_id = create_playlist(playlist_obj.playlist_name)
 
     if new_playlist_id is None:
-        return 'server side error', 500
+        abort(500)
 
-    uris_list = playlist_obj.get_uris_list(playlist_id=playlist_id)
     add_tracks_to_playlist(track_uris=uris_list, playlist_id=new_playlist_id)
+
+    # increase import_count
+    playlist_obj.import_count += 1
+    playlist_obj.save_to_db()
 
     return 'playlist created successfully', 201
